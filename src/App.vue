@@ -10,21 +10,7 @@
     <div class="calculator">
       <header>
         <h1>calc</h1>
-        <div>
-          Theme
-          1
-          2
-          3
-          <input
-            v-model.number="theme"
-            type="range"
-            name="themer"
-            value="1"
-            min="1"
-            max="3"
-            step="1"
-          >
-        </div>
+        <theme-selector />
       </header>
       <div class="display">399 981</div>
       <Keypad />
@@ -33,18 +19,22 @@
 </template>
 
 <script>
+import { store } from '@/store.js';
+
 import Keypad from '@/components/Keypad.vue';
+import ThemeSelector from './components/ThemeSelector.vue';
 
 export default {
   name: 'App',
   components: {
-    Keypad
+    Keypad,
+    ThemeSelector,
   },
-  data() {
-    return {
-      theme: 1,
-    };
-  },
+  computed: {
+    theme() {
+      return store.theme;
+    }
+  }
 }
 </script>
 

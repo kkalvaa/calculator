@@ -23,7 +23,8 @@ export default {
   cursor: pointer;
   transition: all ease-out 35ms;
 
-  &:active {
+  &:active,
+  &.is-active {
     transform: translateY(4px);
     box-shadow: none;
   }

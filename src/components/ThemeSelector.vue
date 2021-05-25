@@ -7,6 +7,7 @@
       <button>3</button>
       <input
         v-model.number="theme"
+        @input="updateTheme"
         type="range"
         name="themer"
         value="1"
@@ -19,8 +20,35 @@
 </template>
 
 <script>
+import { store, actions } from '@/store.js';
+
 export default {
   name: 'ThemeSelector',
+  data() {
+    return {
+      theme: 1,
+    };
+  },
+  computed: {
+    themeStore() {
+      return store.theme;
+    }
+  },
+  methods: {
+    updateTheme() {
+      actions.updateTheme(this.theme);
+    }
+  }
+  /*computed: {
+    theme: {
+      get: () => {
+        return store.theme;
+      },
+      set: (newValue) => {
+        actions.updateThemeAction(newValue);
+      }
+    }
+  }*/
 }
 </script>
 

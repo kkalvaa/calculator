@@ -1,21 +1,33 @@
 <template>
-  <div>
-    <h3>Theme</h3>
-    <div>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <input
-        v-model.number="theme"
-        @input="updateTheme"
-        type="range"
-        name="themer"
-        value="1"
-        min="1"
-        max="3"
-        step="1"
-      >
-    </div>
+  <div class="switcher">
+    <button
+      @click="setTheme(1)"
+      class="theme-btn"
+    >
+      1
+    </button>
+    <button
+      @click="setTheme(2)"
+      class="theme-btn"
+    >
+      2
+    </button>
+    <button
+      @click="setTheme(3)"
+      class="theme-btn"
+    >
+      3
+    </button>
+    <input
+      v-model.number="theme"
+      @input="updateTheme"
+      type="range"
+      name="themer"
+      value="1"
+      min="1"
+      max="3"
+      step="1"
+    >
   </div>
 </template>
 
@@ -35,27 +47,22 @@ export default {
     }
   },
   methods: {
+    setTheme(value) {
+      this.theme = value;
+      actions.updateTheme(value);
+    },
     updateTheme() {
       actions.updateTheme(this.theme);
     }
   }
-  /*computed: {
-    theme: {
-      get: () => {
-        return store.theme;
-      },
-      set: (newValue) => {
-        actions.updateThemeAction(newValue);
-      }
-    }
-  }*/
 }
 </script>
 
 <style lang="scss">
 input[type='range'] {
-  width: 5em;
+  width: 100%;
   background: transparent;
+  grid-column: 1 / -1;
 
   &::-moz-range-thumb {
     background-color: var(--color-toggle);
@@ -71,6 +78,21 @@ input[type='range'] {
     border-radius: 100px;
     border: 0;
   }
+}
+
+.theme-btn {
+  border: 0;
+  background: none;
+  color: var(--color-main);
+  font-weight: 700;
+  margin: 2px;
+  padding: 4px;
+}
+
+.switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 4em;
 }
 
 </style>

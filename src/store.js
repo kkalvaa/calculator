@@ -5,7 +5,7 @@ const store = Vue.observable({
   test: {
     theme: 1,
   },
-  value: 0,
+  value: 399981,
 })
 
 const getters = {

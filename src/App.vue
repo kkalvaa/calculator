@@ -8,11 +8,8 @@
     }"
   >
     <div class="calculator">
-      <header>
-        <h1>calc</h1>
-        <theme-selector />
-      </header>
-      <div class="display">399 981</div>
+      <Header />
+      <Display />
       <Keypad />
     </div>
   </div>
@@ -21,14 +18,16 @@
 <script>
 import { store } from '@/store.js';
 
+import Display from '@/components/Display.vue';
+import Header from '@/components/Header.vue';
 import Keypad from '@/components/Keypad.vue';
-import ThemeSelector from './components/ThemeSelector.vue';
 
 export default {
   name: 'App',
   components: {
-    Keypad,
-    ThemeSelector,
+    Display,
+    Header,
+    Keypad
   },
   computed: {
     theme() {
@@ -149,41 +148,6 @@ body {
   max-width: 460px;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.display {
-  color: var(--color-display);
-  background: var(--color-display-bg);
-  padding: 1rem;
-  font-size: var(--font-base-size);
-  margin: 1em auto;
-  border-radius: var(--radius);
-  text-align: right;
-}
-
-
-[type='range'] {
-  width: 5em;
-  background: transparent;
-}
-
-input[type='range']::-moz-range-thumb {
-  background-color: var(--color-toggle);
-  height: 1.25em;
-  width: 1.25em;
-  border: 0;
-  border-radius: 50%;
-}
-
-input[type='range']::-moz-range-track {
-  background-color: var(--color-toggle-background);
-  height: 1.75em;
-  border-radius: 100px;
-  border: 0;
-}
 
 </style>

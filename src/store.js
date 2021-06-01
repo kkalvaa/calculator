@@ -2,9 +2,6 @@ import Vue from 'vue';
 
 const store = Vue.observable({
   theme: 1,
-  test: {
-    theme: 1,
-  },
   value: 399981,
 })
 

@@ -1,27 +1,29 @@
 <template>
   <div class="keypad" v-hotkey="keymap">
-    <Key id="7" @click.native="click('7')">7</Key>
-    <Key id="8" @click.native="click('8')">8</Key>
-    <Key id="9" @click.native="click('9')">9</Key>
-    <Key class="accent">DEL</Key>
-    <Key id="4" @click.native="click('4')">4</Key>
-    <Key id="5" @click.native="click('5')">5</Key>
-    <Key id="6" @click.native="click('6')">6</Key>
-    <Key id="+">+</Key>
-    <Key id="1" @click.native="click('1')">1</Key>
-    <Key id="2" @click.native="click('2')">2</Key>
-    <Key id="3" @click.native="click('3')">3</Key>
-    <Key id="-">−</Key>
-    <Key id=",">.</Key>
-    <Key id="0" @click.native="click('0')">0</Key>
-    <Key id="/">÷</Key>
-    <Key id="*">×</Key>
-    <Key class="double accent">RESET</Key>
-    <Key id="=" class="double confirm">=</Key>
+    <Key id="7" @click.native="number('7')">7</Key>
+    <Key id="8" @click.native="number('8')">8</Key>
+    <Key id="9" @click.native="number('9')">9</Key>
+    <Key class="accent" @click.native="operand('del')">DEL</Key>
+    <Key id="4" @click.native="number('4')">4</Key>
+    <Key id="5" @click.native="number('5')">5</Key>
+    <Key id="6" @click.native="number('6')">6</Key>
+    <Key id="+" @click.native="operand('+')">+</Key>
+    <Key id="1" @click.native="number('1')">1</Key>
+    <Key id="2" @click.native="number('2')">2</Key>
+    <Key id="3" @click.native="number('3')">3</Key>
+    <Key id="-" @click.native="operand('-')">−</Key>
+    <Key id="," @click.native="operand('.')">.</Key>
+    <Key id="0" @click.native="number('0')">0</Key>
+    <Key id="/" @click.native="operand('/')">÷</Key>
+    <Key id="*" @click.native="operand('*')">×</Key>
+    <Key class="double accent" @click.native="reset">RESET</Key>
+    <Key id="=" class="double confirm" @click.native="operand('=')">=</Key>
   </div>
 </template>
 
 <script>
+import { actions } from '@/store.js';
+
 import Key from '@/components/Key.vue';
 
 export default {
@@ -29,13 +31,14 @@ export default {
   components: {
     Key,
   },
-  data () {
-    return {
-      show: true,
-      inputValue: '',
-    }
-  },
   computed: {
+    displayValue() {
+      if (this.inputValue === '' ) {
+        return 0;
+      } else {
+        return parseFloat(this.inputValue);
+      }
+    },
     keymap() {
       return {
         '1': this.key1,
@@ -61,9 +64,14 @@ export default {
         key.classList.remove('is-active');
       }, 125);
     },
-    click(value) {
-      this.inputValue += value;
-      console.log(this.inputValue);
+    number(value) {
+      actions.updateInputValue(value);
+    },
+    operand(value) {
+      actions.updateInputValue(value);
+    },
+    reset() {
+      actions.reset()
     },
     key1() {
       this.keyPress('1');

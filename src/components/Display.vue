@@ -2,7 +2,7 @@
   <section
     class="display"
   >
-    {{ value.toLocaleString() }}
+    {{ displayValue.toLocaleString() }}
   </section>
 </template>
 
@@ -12,8 +12,15 @@ import { store } from '@/store.js';
 export default {
   name: 'Display',
   computed: {
-    value() {
-      return store.value;
+    inputValue() {
+      return store.inputValue;
+    },
+    displayValue() {
+      if (this.inputValue === '') {
+        return 0;
+      } else {
+        return parseFloat(this.inputValue);
+      }
     }
   }
 }

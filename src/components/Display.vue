@@ -21,6 +21,12 @@ export default {
       } else {
         return parseFloat(this.inputValue);
       }
+    },
+    result() {
+      return store.result;
+    },
+    operator() {
+      return store.operator;
     }
   }
 }

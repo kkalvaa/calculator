@@ -21,7 +21,11 @@ export default {
   border: 0;
   border-radius: var(--radius-small);
   cursor: pointer;
-  transition: all ease-out 35ms;
+  transition:
+    transform ease-out 35ms,
+    box-shadow ease-out 35ms,
+    background-color ease-out 150ms,
+    color ease-out 175ms;
 
   &:active,
   &.is-active {
@@ -31,6 +35,12 @@ export default {
 
   &.double {
     grid-column: span 2;
+  }
+
+  &.is-selected {
+    --color-key: var(--color-key--accent);
+    --color-key-bg: var(--color-key-bg--accent);
+    --color-key-shadow: var(--color-key-shadow--accent);
   }
 
   &.accent {

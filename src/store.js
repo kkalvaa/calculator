@@ -3,6 +3,7 @@ import Vue from 'vue';
 const store = Vue.observable({
   theme: 1,
   inputValue: '',
+  operator: '',
   result: 0,
 })
 
@@ -21,6 +22,9 @@ const mutations = {
   setResult(newValue) {
     store.result = newValue;
   },
+  setOperator(operator) {
+    store.operator = operator;
+  }
 }
 
 const actions = {
@@ -38,8 +42,39 @@ const actions = {
     }
     mutations.setInputValue(inputValue);
   },
+  operation(newOperator) {
+    let result = store.result;
+    if (result === 0) {
+      mutations.setResult(parseFloat(store.inputValue));
+      mutations.setInputValue('');
+    } else {
+      const operator = store.operator;
+      if (operator === '+') {
+        result += parseFloat(store.inputValue);
+        mutations.setResult(result);
+        mutations.setInputValue('');
+      } else if (operator === '-') {
+        result -= parseFloat(store.inputValue);
+        mutations.setResult(result);
+        mutations.setInputValue('');
+      } else if (operator === '*') {
+        result *= parseFloat(store.inputValue);
+        mutations.setResult(result);
+        mutations.setInputValue('');
+      } else if (operator === '/') {
+        result /= parseFloat(store.inputValue);
+        mutations.setResult(result);
+        mutations.setInputValue('');
+      }
+    }
+    mutations.setOperator(newOperator);
+    if (newOperator === '=') {
+      mutations.setInputValue(result.toString());
+    }
+  },
   reset() {
     mutations.setInputValue('');
+    mutations.setOperator('');
     mutations.setResult(0);
   }
 }

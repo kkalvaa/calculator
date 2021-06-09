@@ -46,13 +46,34 @@ export default {
       return store.theme;
     }
   },
+  created() {
+    this.initTheme();
+  },
   methods: {
+    initTheme() {
+      // First check if the user previously has actively selected a theme
+      // if not, check if the user favours high contrast mode
+      // or light or dark modes, then set the theme selector value.
+      if (localStorage.getItem('theme')) {
+        this.setTheme(parseInt(localStorage.getItem('theme')));
+      } else {
+        if (window.matchMedia('(prefers-contrast: more').matches) {
+          this.theme = 3;
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          this.theme = 2;
+        } else {
+          this.theme = 1;
+        }
+      }
+    },
     setTheme(value) {
       this.theme = value;
       actions.updateTheme(value);
+      localStorage.setItem('theme', this.theme);
     },
     updateTheme() {
       actions.updateTheme(this.theme);
+      localStorage.setItem('theme', this.theme);
     }
   }
 }

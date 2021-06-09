@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 const store = Vue.observable({
-  theme: 1,
+  theme: 0,
   inputValue: '',
   operator: '',
   result: 0,

@@ -40,9 +40,14 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
 
+html {
+  height: 100%;
+}
+
 body {
   padding: 0;
   margin: 0;
+  height: 100%;
 }
 
 :root {
@@ -211,7 +216,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100%;
+  padding: 1em;
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

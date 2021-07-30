@@ -6,6 +6,7 @@ import './registerServiceWorker'
 Vue.config.productionTip = false
 
 Vue.use(VueHotkey, {
+  '0': 96,
   '1': 97,
   '2': 98,
   '3': 99,
@@ -16,11 +17,13 @@ Vue.use(VueHotkey, {
   '8': 104,
   '9': 105,
   '-': 109,
-  '+': 107,
+  '+': 43,
   '*': 106,
   '/': 111,
-  '=': 187,
+  '=': 61,
   '.': 110,
+  'del': 8,
+  'enter': 13,
 });
 
 new Vue({

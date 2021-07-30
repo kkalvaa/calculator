@@ -3,7 +3,7 @@
     <Key id="7" @click.native="number('7')">7</Key>
     <Key id="8" @click.native="number('8')">8</Key>
     <Key id="9" @click.native="number('9')">9</Key>
-    <Key class="accent" @click.native="number('del')">DEL</Key>
+    <Key id="del" class="accent" @click.native="number('del')">DEL</Key>
     <Key id="4" @click.native="number('4')">4</Key>
     <Key id="5" @click.native="number('5')">5</Key>
     <Key id="6" @click.native="number('6')">6</Key>
@@ -12,7 +12,7 @@
     <Key id="2" @click.native="number('2')">2</Key>
     <Key id="3" @click.native="number('3')">3</Key>
     <Key id="-" @click.native="operation('-')" :class="{'is-active' : activeOperator === '-',}">−</Key>
-    <Key id="," @click.native="number('.')">.</Key>
+    <Key id="." @click.native="number('.')">.</Key>
     <Key id="0" @click.native="number('0')">0</Key>
     <Key id="/" @click.native="operation('/')" :class="{'is-active' : activeOperator === '/',}">÷</Key>
     <Key id="*" @click.native="operation('*')" :class="{'is-active' : activeOperator === '*',}">×</Key>
@@ -51,6 +51,14 @@ export default {
         '8': this.key8,
         '9': this.key9,
         '0': this.key0,
+        '.': this.keyComma,
+        '-': this.keyMinus,
+        '+': this.keyPlus,
+        '*': this.keyMultiply,
+        '/': this.keyDivide,
+        '=': this.keyEquals,
+        'enter': this.keyEquals,
+        'del': this.keyDel,
       }
     },
     activeOperator() {
@@ -105,6 +113,30 @@ export default {
     },
     key0() {
       this.keyPress('0');
+    },
+    keyComma() {
+      this.keyPress('.');
+    },
+    keyPlus() {
+      this.keyPress('+');
+    },
+    keyMinus() {
+      this.keyPress('-');
+    },
+    keyMultiply() {
+      this.keyPress('*');
+    },
+    keyDivide() {
+      this.keyPress('/');
+    },
+    keyEquals() {
+      this.keyPress('=');
+    },
+    keyDel() {
+      this.keyPress('del');
+    },
+    keyReset() {
+      this.keyPress('reset');
     },
   }
 }

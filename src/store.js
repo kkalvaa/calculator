@@ -4,6 +4,7 @@ const store = Vue.observable({
   theme: 0,
   inputValue: '',
   operation: '',
+  operator: '',
   result: 0,
 })
 
@@ -25,6 +26,9 @@ const mutations = {
   setOperation(newValue) {
     store.operation = newValue;
   },
+  setOperator(operator) {
+    store.operator = operator;
+  }
 }
 
 const actions = {
@@ -43,6 +47,7 @@ const actions = {
     mutations.setInputValue(inputValue);
   },
   operation(newOperator) {
+    mutations.setOperator(newOperator);
     let operation = store.operation;
     if (newOperator === '=') {
       operation += store.inputValue;

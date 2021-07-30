@@ -25,8 +25,8 @@ export default {
     result() {
       return store.result;
     },
-    operator() {
-      return store.operator;
+    operation() {
+      return store.operation;
     }
   }
 }

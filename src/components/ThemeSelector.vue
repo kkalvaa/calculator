@@ -2,18 +2,21 @@
   <div class="switcher">
     <button
       @click="setTheme(1)"
+      @keypress="setTheme(1)"
       class="theme-btn"
     >
       1
     </button>
     <button
       @click="setTheme(2)"
+      @keypress="setTheme(2)"
       class="theme-btn"
     >
       2
     </button>
     <button
       @click="setTheme(3)"
+      @keypress="setTheme(3)"
       class="theme-btn"
     >
       3

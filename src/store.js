@@ -3,7 +3,7 @@ import Vue from 'vue';
 const store = Vue.observable({
   theme: 0,
   inputValue: '',
-  operator: '',
+  operation: '',
   result: 0,
 })
 
@@ -22,9 +22,9 @@ const mutations = {
   setResult(newValue) {
     store.result = newValue;
   },
-  setOperator(operator) {
-    store.operator = operator;
-  }
+  setOperation(newValue) {
+    store.operation = newValue;
+  },
 }
 
 const actions = {
@@ -43,38 +43,23 @@ const actions = {
     mutations.setInputValue(inputValue);
   },
   operation(newOperator) {
-    let result = store.result;
-    if (result === 0) {
-      mutations.setResult(parseFloat(store.inputValue));
-      mutations.setInputValue('');
-    } else {
-      const operator = store.operator;
-      if (operator === '+') {
-        result += parseFloat(store.inputValue);
-        mutations.setResult(result);
-        mutations.setInputValue('');
-      } else if (operator === '-') {
-        result -= parseFloat(store.inputValue);
-        mutations.setResult(result);
-        mutations.setInputValue('');
-      } else if (operator === '*') {
-        result *= parseFloat(store.inputValue);
-        mutations.setResult(result);
-        mutations.setInputValue('');
-      } else if (operator === '/') {
-        result /= parseFloat(store.inputValue);
-        mutations.setResult(result);
-        mutations.setInputValue('');
-      }
-    }
-    mutations.setOperator(newOperator);
+    let operation = store.operation;
     if (newOperator === '=') {
-      mutations.setInputValue(result.toString());
+      operation += store.inputValue;
+      mutations.setOperation(operation);
+      mutations.setResult(eval(operation));
+      mutations.setInputValue(store.result.toString());
+
+    } else {
+      operation += store.inputValue +newOperator;
+      mutations.setOperation(operation);
+      mutations.setInputValue('');
     }
   },
   reset() {
     mutations.setInputValue('');
     mutations.setOperator('');
+    mutations.setOperation('');
     mutations.setResult(0);
   }
 }
